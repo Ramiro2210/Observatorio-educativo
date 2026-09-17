@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Un observatorio interactivo sobre aprendizajes, brechas y trayectorias escolares en Argentina.">
+  <title>¿En qué estado está la educación argentina?</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b2c5f'/%3E%3Cpath d='M16 18h12c6 0 10 2 12 6 2-4 6-6 12-6v29H40c-4 0-7 1-8 3-1-2-4-3-8-3H12V18h4Z' fill='%23fff'/%3E%3Cpath d='M32 24v25' stroke='%232c8fe9' stroke-width='3'/%3E%3C/svg%3E">
+  <style>
+    :root { --navy:#0b2c5f; --blue:#1677d2; --sky:#2c9be8; --violet:#8c57d9; --ink:#12213b; --muted:#53627a; --paper:#fbfcff; --mist:#f0f5fc; --line:#dce5f1; --red:#d94d5c; --max:1180px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; background:var(--paper); }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.55; }
+    a { color:inherit; }
+    .topbar { position:fixed; inset:0 0 auto; z-index:20; height:70px; display:flex; align-items:center; transition:background .28s ease, box-shadow .28s ease; }
+    .topbar__inner { width:min(calc(100% - 48px), var(--max)); margin:auto; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    .brand { color:#fff; font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; white-space:nowrap; }
+    .bar-title { color:var(--navy); font-weight:800; font-size:clamp(.88rem, 1.5vw, 1.1rem); line-height:1.15; opacity:0; transform:translateY(-8px); transition:opacity .22s ease, transform .22s ease; max-width:450px; }
+    .topbar.is-scrolled { background:rgba(251,252,255,.96); box-shadow:0 1px 0 rgba(11,44,95,.1); backdrop-filter:blur(12px); }
+    .topbar.is-scrolled .brand { color:var(--blue); }
+    .topbar.is-scrolled .bar-title { opacity:1; transform:none; }
+    .hero { min-height:100svh; position:relative; display:flex; align-items:flex-end; isolation:isolate; overflow:hidden; background:var(--navy); }
+    .hero__image { position:absolute; inset:0; z-index:-2; background:url('assets/hero-estudiantes.jpg') center center / cover no-repeat; transform:scale(1.025); transform-origin:center; }
+    .hero__wash { position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg, rgba(4,22,51,.92) 0%, rgba(7,31,64,.69) 40%, rgba(5,23,49,.19) 100%), linear-gradient(0deg, rgba(5,20,46,.65), transparent 55%); }
+    .hero__content { width:min(calc(100% - 48px), var(--max)); margin:0 auto; padding:150px 0 92px; color:#fff; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; color:inherit; font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    .eyebrow::before { content:""; display:inline-block; width:8px; height:8px; background:var(--sky); border-radius:50%; }
+    h1, h2, h3, p { margin:0; }
+    h1 { max-width:900px; margin-top:20px; font-size:clamp(3rem, 7.4vw, 6.65rem); line-height:.97; letter-spacing:-.065em; }
+    .hero__lead { max-width:620px; margin-top:28px; color:#e9f2ff; font-size:clamp(1.12rem, 2.1vw, 1.42rem); line-height:1.42; }
+    .hero__scroll { display:flex; align-items:center; gap:11px; margin-top:52px; font-size:.78rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+    .hero__scroll i { width:30px; height:1px; background:var(--sky); display:block; }
+    .intro { background:var(--paper); padding:clamp(60px, 9vw, 118px) 24px; }
+    .intro__wrap { width:min(100%, var(--max)); margin:auto; }
+    .section-kicker { color:var(--blue); font-weight:800; font-size:.78rem; letter-spacing:.11em; text-transform:uppercase; }
+    .intro h2 { margin-top:10px; max-width:760px; font-size:clamp(2rem, 4.2vw, 3.8rem); line-height:1.03; letter-spacing:-.05em; }
+    .explainer { min-height:min(680px, 100vh); margin-top:42px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); display:grid; grid-template-columns:repeat(3, 1fr); }
+    .explainer article { padding:42px clamp(24px, 3.6vw, 50px) 46px; border-right:1px solid var(--line); display:flex; flex-direction:column; }
+    .explainer article:last-child { border-right:0; }
+    .explainer__number { color:var(--sky); font-size:.78rem; font-weight:800; letter-spacing:.09em; }
+    .explainer h3 { margin:56px 0 18px; font-size:clamp(1.35rem, 2.15vw, 2rem); line-height:1.05; letter-spacing:-.035em; }
+    .explainer p { color:#3f4f69; font-size:1rem; }
+    .story { padding:0 24px; }
+    .story__block { padding:clamp(72px, 10vw, 132px) 0; border-top:1px solid var(--line); }
+    .story__grid { width:min(100%, var(--max)); margin:auto; display:grid; grid-template-columns:1fr; gap:clamp(34px, 5vw, 58px); align-items:start; }
+    .story__meta { max-width:740px; }
+    .story__index { display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; color:#fff; background:var(--navy); border-radius:50%; font-size:.78rem; font-weight:800; }
+    .story h2 { margin-top:18px; font-size:clamp(2rem, 3.8vw, 3.25rem); line-height:1.02; letter-spacing:-.05em; }
+    .story__meta p { margin-top:17px; color:var(--muted); font-size:1.03rem; }
+    .score-row { max-width:530px; margin-top:27px; display:grid; grid-template-columns:repeat(3, 1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .score { padding:12px 10px 14px 0; border-right:1px solid var(--line); }
+    .score + .score { padding-left:12px; }
+    .score:last-child { border-right:0; }
+    .score strong { display:block; font-size:1.58rem; line-height:1; letter-spacing:-.05em; }
+    .score span { display:block; margin-top:6px; color:var(--muted); font-size:.75rem; font-weight:700; }
+    .chart-area { min-width:0; width:100%; }
+    .chart-embed { overflow:hidden; background:#fff; border:1px solid #dce7f6; border-radius:4px; }
+    .chart-embed iframe { display:block; width:100%; height:760px; border:0; background:#fff; }
+    .chart-embed--historical iframe { height:940px; }
+    .chart-embed--standard iframe { height:720px; }
+    .chart-embed--regional iframe { height:960px; }
+    .chart-embed--escs iframe { height:904px; }
+    .chart-embed--management iframe { height:832px; }
+    .chart-placeholder { position:relative; min-height:clamp(420px, 54vw, 620px); overflow:hidden; background:var(--mist); border:1px solid #dce7f6; border-radius:4px; display:flex; flex-direction:column; justify-content:flex-end; padding:28px; }
+    .chart-placeholder::after { content:""; position:absolute; inset:0; opacity:.65; background-image:linear-gradient(#dce7f6 1px, transparent 1px), linear-gradient(90deg, #dce7f6 1px, transparent 1px); background-size:100% 25%, 25% 100%; pointer-events:none; }
+    .chart-placeholder > * { position:relative; z-index:1; }
+    .chart-label { color:var(--blue); font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    .chart-placeholder h3 { max-width:380px; margin-top:10px; font-size:clamp(1.6rem, 3vw, 2.55rem); line-height:1.04; letter-spacing:-.045em; }
+    .chart-placeholder p { max-width:420px; margin-top:12px; color:var(--muted); }
+    .chart-badge { align-self:flex-start; margin-top:26px; padding:7px 11px; border:1px solid #bdd7f1; color:var(--navy); background:rgba(255,255,255,.78); font-size:.76rem; font-weight:800; }
+    .story__note { margin-top:20px; padding:16px 18px; border-left:3px solid var(--red); background:#fff7f8; color:#70333c; font-size:.9rem; line-height:1.45; }
+    .story__block--tint { margin:0 -24px; padding-left:24px; padding-right:24px; background:#f5f8fd; }
+    .dual-placeholders { display:grid; grid-template-columns:1fr; gap:20px; }
+    .dual-placeholders .chart-placeholder { min-height:clamp(360px, 45vw, 520px); padding:28px; }
+    .dual-placeholders h3 { font-size:1.55rem; }
+    .dual-placeholders p { font-size:.92rem; }
+    .mini-stats { margin-top:25px; display:flex; gap:14px; }
+    .mini-stats span { padding:7px 10px; background:#e9f3fd; color:var(--navy); font-size:.8rem; font-weight:800; }
+    .footer { padding:58px 24px; color:#eaf1fc; background:var(--navy); }
+    .footer__inner { width:min(100%, var(--max)); margin:auto; display:flex; justify-content:space-between; gap:30px; }
+    .footer h2 { font-size:1.55rem; letter-spacing:-.035em; }
+    .footer p { max-width:520px; margin-top:10px; color:#bdcce4; }
+    .footer small { color:#9fb3d0; font-size:.76rem; }
+    @media (max-width:800px) {
+      .topbar__inner, .hero__content { width:min(calc(100% - 36px), var(--max)); }
+      .brand { font-size:.65rem; }
+      .bar-title { max-width:250px; }
+      .intro, .story { padding-left:18px; padding-right:18px; }
+      .explainer { min-height:0; grid-template-columns:1fr; }
+      .explainer article { min-height:0; padding:34px 24px 38px; border-right:0; border-bottom:1px solid var(--line); }
+      .explainer article:last-child { border-bottom:0; }
+      .explainer h3 { margin-top:32px; }
+      .story__grid { grid-template-columns:1fr; gap:30px; }
+      .story__block--tint { margin-left:-18px; margin-right:-18px; padding-left:18px; padding-right:18px; }
+      .chart-placeholder { min-height:300px; }
+      .chart-embed iframe { height:700px; }
+      .chart-embed--historical iframe { height:940px; }
+      .chart-embed--standard iframe { height:660px; }
+      .chart-embed--regional iframe { height:960px; }
+      .chart-embed--escs iframe { height:904px; }
+      .chart-embed--management iframe { height:832px; }
+      .dual-placeholders { grid-template-columns:1fr; }
+      .footer__inner { flex-direction:column; }
+    }
+    @media (max-width:480px) {
+      .topbar { height:58px; }
+      .bar-title { font-size:.78rem; max-width:190px; }
+      .hero__content { padding-top:105px; padding-bottom:54px; }
+      h1 { font-size:clamp(2.75rem, 14vw, 4.3rem); }
+      .hero__lead { font-size:1.05rem; }
+      .score-row { gap:0; }
+      .score strong { font-size:1.35rem; }
+      .score span { font-size:.69rem; }
+    }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .hero__image, .hero__wash, .hero__lead { transition:none!important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar" id="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="#inicio">Observatorio educativo</a>
+      <div class="bar-title">¿En qué estado está la educación argentina?</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio" aria-labelledby="site-title">
+      <div class="hero__image" id="heroImage"></div>
+      <div class="hero__wash" id="heroWash"></div>
+      <div class="hero__content">
+        <span class="eyebrow">PISA 2025 · Argentina</span>
+        <h1 id="site-title">¿En qué estado está la educación argentina?</h1>
+        <p class="hero__lead" id="heroLead">Un observatorio interactivo sobre aprendizajes, brechas y trayectorias escolares a través de los datos.</p>
+        <div class="hero__scroll" aria-hidden="true"><i></i> Explorá los datos</div>
+      </div>
+    </section>
+
+    <section class="intro" aria-labelledby="pisa-heading">
+      <div class="intro__wrap">
+        <p class="section-kicker">Punto de partida</p>
+        <h2 id="pisa-heading">Una lectura de la educación argentina a partir de una misma regla de medición.</h2>
+        <div class="explainer">
+          <article>
+            <span class="explainer__number">01 · LA PRUEBA</span>
+            <h3>¿Qué son las pruebas PISA?</h3>
+            <p>PISA es una evaluación internacional coordinada por la OCDE cada tres años. Mide qué pueden hacer estudiantes de 15 años de más de 80 países, sin depender del año escolar que cursan.</p>
+            <p style="margin-top:18px">No evalúa si se cumplió un programa curricular: observa si los jóvenes pueden aplicar lo aprendido ante problemas de la vida cotidiana.</p>
+          </article>
+          <article>
+            <span class="explainer__number">02 · LA MEDICIÓN</span>
+            <h3>¿Qué miden, de qué manera y qué resultados se obtienen?</h3>
+            <p>PISA evalúa Matemática, Lectura y Ciencias mediante situaciones, textos, gráficos y problemas para resolver. Los resultados combinan puntajes promedio y seis niveles de desempeño.</p>
+            <p style="margin-top:18px">El Nivel 2 es el umbral mínimo de competencias: estar por debajo implica dificultades para resolver tareas básicas de comprensión, cálculo y razonamiento.</p>
+          </article>
+          <article>
+            <span class="explainer__number">03 · EL CONTEXTO</span>
+            <h3>¿Por qué son relevantes para analizar la educación en Argentina?</h3>
+            <p>PISA permite seguir la evolución de los aprendizajes y comparar a Argentina con otros países de la región bajo una misma medición.</p>
+            <p style="margin-top:18px">Además, sus cuestionarios de contexto muestran cómo el origen socioeconómico y el tipo de escuela se relacionan con los resultados, haciendo visibles las brechas educativas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="story" aria-label="Recorrido por los datos">
+      <article class="story__block" id="presente">
+        <div class="story__grid">
+          <div class="story__meta">
+            <span class="story__index">01</span>
+            <p class="section-kicker" style="margin-top:20px">La foto del presente · 2025</p>
+            <h2>¿Qué saben hacer los estudiantes argentinos?</h2>
+            <p>La distribución por niveles permite mirar más allá del promedio: muestra qué proporción de estudiantes alcanza los distintos umbrales de desempeño.</p>
+            <div class="score-row" aria-label="Puntajes promedio 2025">
+              <div class="score"><strong>367</strong><span>Matemática</span></div>
+              <div class="score"><strong>389</strong><span>Lectura</span></div>
+              <div class="score"><strong>393</strong><span>Ciencias</span></div>
+            </div>
+          </div>
+          <div class="chart-area">
+            <div class="chart-embed">
+              <iframe src="graphs/pisa-niveles-2025.html" title="PISA 2025 Argentina — Niveles de desempeño"></iframe>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="story__block story__block--tint" id="historico">
+        <div class="story__grid">
+          <div class="story__meta">
+            <span class="story__index">02</span>
+            <p class="section-kicker" style="margin-top:20px">16 años de PISA</p>
+            <h2>Del estancamiento al retroceso</h2>
+            <p>Una serie histórica para seguir los cambios en Matemática, Lectura y Ciencias desde 2009 hasta 2025.</p>
+          </div>
+          <div class="chart-area">
+            <div class="chart-embed chart-embed--historical">
+              <iframe src="graphs/pisa-argentina-historico-2025.html" title="Evolución histórica de los puntajes PISA en Argentina"></iframe>
+            </div>
+            <aside class="story__note"><strong>Nota sobre 2015.</strong> La edición 2015 no integra la trayectoria porque la OCDE indicó que los resultados de Argentina no eran comparables con los de otras ediciones debido a un marco muestral incompleto.</aside>
+          </div>
+        </div>
+      </article>
+
+      <article class="story__block" id="regional">
+        <div class="story__grid">
+          <div class="story__meta">
+            <span class="story__index">03</span>
+            <p class="section-kicker" style="margin-top:20px">Regional · 2025</p>
+            <h2>¿Es un problema argentino o regional?</h2>
+            <p>La comparación con países vecinos sitúa el resultado argentino en una conversación regional y permite separar tendencias compartidas de trayectorias propias.</p>
+          </div>
+          <div class="chart-area dual-placeholders">
+            <div class="chart-embed chart-embed--standard chart-embed--regional"><iframe src="graphs/pisa-regional-2025.html" title="Comparación regional PISA 2025"></iframe></div>
+            <div class="chart-placeholder"><span class="chart-label">Gráfico 3B</span><h3>Trayectorias seleccionadas</h3><p>Argentina frente a países de la región.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="story__block story__block--tint" id="desigualdad">
+        <div class="story__grid">
+          <div class="story__meta">
+            <span class="story__index">04</span>
+            <p class="section-kicker" style="margin-top:20px">La desigualdad</p>
+            <h2>El rendimiento también está atravesado por el origen</h2>
+            <p>Los datos permiten poner en relación el nivel socioeconómico y cultural de los estudiantes con los resultados de aprendizaje y el tipo de gestión escolar.</p>
+          </div>
+          <div class="chart-area dual-placeholders">
+            <div class="chart-embed chart-embed--standard chart-embed--escs"><iframe src="graphs/pisa-escs-2025.html" title="Resultados PISA según cuartiles socioeconómicos"></iframe></div>
+            <div class="chart-embed chart-embed--standard chart-embed--management"><iframe src="graphs/pisa-gestion-2025.html" title="Resultados PISA según tipo de gestión escolar"></iframe></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="story__block" id="genero">
+        <div class="story__grid">
+          <div class="story__meta">
+            <span class="story__index">05</span>
+            <p class="section-kicker" style="margin-top:20px">Brechas por área</p>
+            <h2>Matemática y Lectura no cuentan la misma historia</h2>
+            <p>La diferencia entre los puntajes de varones y mujeres cambia según el área de conocimiento.</p>
+            <div class="mini-stats"><span>Matemática · hombres +18</span><span>Lectura · mujeres +9</span></div>
+          </div>
+          <div class="chart-area">
+            <div class="chart-placeholder"><span class="chart-label">Gráfico 6 · Género</span><h3>Brechas que cambian según la materia</h3><p>Espacio preparado para la comparación interactiva por sexo.</p><span class="chart-badge">Matemática · Lectura · Ciencias</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="story__block story__block--tint" id="resiliencia">
+        <div class="story__grid">
+          <div class="story__meta">
+            <span class="story__index">06</span>
+            <p class="section-kicker" style="margin-top:20px">Excepciones</p>
+            <h2>Los estudiantes que logran romper la tendencia</h2>
+            <p>Este bloque reunirá los indicadores de resiliencia: estudiantes que, pese a un contexto desfavorable, alcanzan desempeños altos.</p>
+            <div class="mini-stats"><span>13,2% Matemática</span><span>14,6% Lectura</span><span>14,2% Ciencias</span></div>
+          </div>
+          <div class="chart-area">
+            <div class="chart-placeholder"><span class="chart-label">Gráfico 7 · Resiliencia</span><h3>Cuando el contexto no determina todo</h3><p>Espacio preparado para incorporar la próxima visualización.</p><span class="chart-badge">Próximamente</span></div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div><h2>Educación argentina, en datos.</h2><p>Un recorrido visual para leer aprendizajes, brechas y trayectorias sin perder de vista el contexto.</p></div>
+      <small>Fuentes generales: OCDE · PISA. Las fuentes específicas se indicarán en cada gráfico.</small>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const topbar = document.getElementById('topbar');
+      const heroImage = document.getElementById('heroImage');
+      const heroWash = document.getElementById('heroWash');
+      const heroLead = document.getElementById('heroLead');
+      const updateHero = () => {
+        const progress = Math.min(Math.max(window.scrollY / (window.innerHeight * .78), 0), 1);
+        topbar.classList.toggle('is-scrolled', window.scrollY > 32);
+        heroImage.style.opacity = String(1 - progress);
+        heroWash.style.opacity = String(1 - progress * .72);
+        heroLead.style.opacity = String(1 - Math.min(progress * 1.35, 1));
+      heroLead.style.transform = `translateY(${-20 * progress}px)`;
+      };
+      updateHero();
+      window.addEventListener('scroll', updateHero, { passive:true });
+    })();
+  </script>
+</body>
+</html>
