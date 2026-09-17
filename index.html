@@ -55,15 +55,15 @@
     .score span { display:block; margin-top:6px; color:var(--muted); font-size:.75rem; font-weight:700; }
     .chart-area { min-width:0; width:100%; }
     .chart-embed { overflow:hidden; background:#fff; border:1px solid #dce7f6; border-radius:4px; }
-    .chart-embed iframe { display:block; width:100%; height:760px; border:0; background:#fff; }
-    .chart-embed--historical iframe { height:940px; }
-    .chart-embed--standard iframe { height:720px; }
-    .chart-embed--regional iframe { height:960px; }
-    .chart-embed--map iframe { height:840px; }
-    .chart-embed--escs iframe { height:904px; }
-    .chart-embed--management iframe { height:832px; }
-    .chart-embed--gender iframe { height:830px; }
-    .chart-embed--resilience iframe { height:830px; }
+    .chart-embed iframe { display:block; width:100%; height:650px; border:0; background:#fff; }
+    .chart-embed--historical iframe { height:735px; }
+    .chart-embed--standard iframe { height:680px; }
+    .chart-embed--regional iframe { height:710px; }
+    .chart-embed--map iframe { height:735px; }
+    .chart-embed--escs iframe { height:680px; }
+    .chart-embed--management iframe { height:655px; }
+    .chart-embed--gender iframe { height:650px; }
+    .chart-embed--resilience iframe { height:640px; }
     .chart-placeholder { position:relative; min-height:clamp(420px, 54vw, 620px); overflow:hidden; background:var(--mist); border:1px solid #dce7f6; border-radius:4px; display:flex; flex-direction:column; justify-content:flex-end; padding:28px; }
     .chart-placeholder::after { content:""; position:absolute; inset:0; opacity:.65; background-image:linear-gradient(#dce7f6 1px, transparent 1px), linear-gradient(90deg, #dce7f6 1px, transparent 1px); background-size:100% 25%, 25% 100%; pointer-events:none; }
     .chart-placeholder > * { position:relative; z-index:1; }
@@ -96,15 +96,15 @@
       .story__grid { grid-template-columns:1fr; gap:30px; }
       .story__block--tint { margin-left:-18px; margin-right:-18px; padding-left:18px; padding-right:18px; }
       .chart-placeholder { min-height:300px; }
-      .chart-embed iframe { height:700px; }
-      .chart-embed--historical iframe { height:940px; }
-      .chart-embed--standard iframe { height:660px; }
-      .chart-embed--regional iframe { height:960px; }
-      .chart-embed--map iframe { height:1160px; }
-      .chart-embed--escs iframe { height:904px; }
-      .chart-embed--management iframe { height:832px; }
-      .chart-embed--gender iframe { height:1020px; }
-      .chart-embed--resilience iframe { height:930px; }
+      .chart-embed iframe { height:760px; }
+      .chart-embed--historical iframe { height:830px; }
+      .chart-embed--standard iframe { height:750px; }
+      .chart-embed--regional iframe { height:720px; }
+      .chart-embed--map iframe { height:980px; }
+      .chart-embed--escs iframe { height:750px; }
+      .chart-embed--management iframe { height:730px; }
+      .chart-embed--gender iframe { height:720px; }
+      .chart-embed--resilience iframe { height:750px; }
       .dual-placeholders { grid-template-columns:1fr; }
       .footer__inner { flex-direction:column; }
     }
@@ -172,10 +172,9 @@
       <article class="story__block" id="presente">
         <div class="story__grid">
           <div class="story__meta">
-            <span class="story__index">01</span>
-            <p class="section-kicker" style="margin-top:20px">La foto del presente · 2025</p>
+            <p class="section-kicker">La foto del presente</p>
             <h2>¿Qué saben hacer los estudiantes argentinos?</h2>
-            <p>La distribución por niveles permite mirar más allá del promedio: muestra qué proporción de estudiantes alcanza los distintos umbrales de desempeño.</p>
+            <p>La distribución por niveles evalúa el promedio en cada área. Además muestra qué proporción de estudiantes alcanza los diferentes niveles de desempeño.</p>
             <div class="score-row" aria-label="Puntajes promedio 2025">
               <div class="score"><strong>367</strong><span>Matemática</span></div>
               <div class="score"><strong>389</strong><span>Lectura</span></div>
@@ -193,10 +192,9 @@
       <article class="story__block story__block--tint" id="historico">
         <div class="story__grid">
           <div class="story__meta">
-            <span class="story__index">02</span>
-            <p class="section-kicker" style="margin-top:20px">16 años de PISA</p>
+            <p class="section-kicker">19 años de PISA</p>
             <h2>Del estancamiento al retroceso</h2>
-            <p>Una serie histórica para seguir los cambios en Matemática, Lectura y Ciencias desde 2009 hasta 2025.</p>
+            <p>El desempeño a lo largo de los años ha mostrado signos de estancamiento y empeoramiento en Matemática, Lectura y Ciencias desde 2006 hasta 2025.</p>
           </div>
           <div class="chart-area">
             <div class="chart-embed chart-embed--historical">
@@ -210,10 +208,9 @@
       <article class="story__block" id="regional">
         <div class="story__grid">
           <div class="story__meta">
-            <span class="story__index">03</span>
-            <p class="section-kicker" style="margin-top:20px">Regional · 2025</p>
-            <h2>¿Es un problema argentino o regional?</h2>
-            <p>La comparación con países vecinos sitúa el resultado argentino en una conversación regional y permite separar tendencias compartidas de trayectorias propias.</p>
+            <p class="section-kicker">Regional</p>
+            <h2>El estado actual de la región</h2>
+            <p>La comparación entre Argentina y los países vecinos de la región permite comparar tendencias en las trayectorias educativas.</p>
           </div>
           <div class="chart-area dual-placeholders">
             <div class="chart-embed chart-embed--standard chart-embed--regional"><iframe src="graphs/pisa-regional-2025.html" title="Comparación regional PISA 2025"></iframe></div>
@@ -225,9 +222,8 @@
       <article class="story__block story__block--tint" id="desigualdad">
         <div class="story__grid">
           <div class="story__meta">
-            <span class="story__index">04</span>
-            <p class="section-kicker" style="margin-top:20px">La desigualdad</p>
-            <h2>El rendimiento también está atravesado por el origen</h2>
+            <p class="section-kicker">La desigualdad</p>
+            <h2>Las desigualdades socioeconómicas y culturales se reflejan en los resultados</h2>
             <p>Los datos permiten poner en relación el nivel socioeconómico y cultural de los estudiantes con los resultados de aprendizaje y el tipo de gestión escolar.</p>
           </div>
           <div class="chart-area dual-placeholders">
@@ -240,9 +236,8 @@
       <article class="story__block" id="genero">
         <div class="story__grid">
           <div class="story__meta">
-            <span class="story__index">05</span>
-            <p class="section-kicker" style="margin-top:20px">Brechas por área</p>
-            <h2>Matemática y Lectura no cuentan la misma historia</h2>
+            <p class="section-kicker">Brecha por género</p>
+            <h2>Los resultados muestran diferentes tendencias de acuerdo al género</h2>
             <p>La diferencia entre los puntajes de varones y mujeres cambia según el área de conocimiento.</p>
             <div class="mini-stats"><span>Matemática · hombres +18</span><span>Lectura · mujeres +9</span></div>
           </div>
@@ -255,8 +250,7 @@
       <article class="story__block story__block--tint" id="resiliencia">
         <div class="story__grid">
           <div class="story__meta">
-            <span class="story__index">06</span>
-            <p class="section-kicker" style="margin-top:20px">Excepciones</p>
+            <p class="section-kicker">Excepciones</p>
             <h2>Los estudiantes que logran romper la tendencia</h2>
             <p>Este bloque reunirá los indicadores de resiliencia: estudiantes que, pese a un contexto desfavorable, alcanzan desempeños altos.</p>
             <div class="mini-stats"><span>13,2% Matemática</span><span>14,6% Lectura</span><span>14,2% Ciencias</span></div>
