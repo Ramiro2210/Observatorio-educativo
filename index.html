@@ -59,8 +59,11 @@
     .chart-embed--historical iframe { height:940px; }
     .chart-embed--standard iframe { height:720px; }
     .chart-embed--regional iframe { height:960px; }
+    .chart-embed--map iframe { height:840px; }
     .chart-embed--escs iframe { height:904px; }
     .chart-embed--management iframe { height:832px; }
+    .chart-embed--gender iframe { height:830px; }
+    .chart-embed--resilience iframe { height:830px; }
     .chart-placeholder { position:relative; min-height:clamp(420px, 54vw, 620px); overflow:hidden; background:var(--mist); border:1px solid #dce7f6; border-radius:4px; display:flex; flex-direction:column; justify-content:flex-end; padding:28px; }
     .chart-placeholder::after { content:""; position:absolute; inset:0; opacity:.65; background-image:linear-gradient(#dce7f6 1px, transparent 1px), linear-gradient(90deg, #dce7f6 1px, transparent 1px); background-size:100% 25%, 25% 100%; pointer-events:none; }
     .chart-placeholder > * { position:relative; z-index:1; }
@@ -97,8 +100,11 @@
       .chart-embed--historical iframe { height:940px; }
       .chart-embed--standard iframe { height:660px; }
       .chart-embed--regional iframe { height:960px; }
+      .chart-embed--map iframe { height:1160px; }
       .chart-embed--escs iframe { height:904px; }
       .chart-embed--management iframe { height:832px; }
+      .chart-embed--gender iframe { height:1020px; }
+      .chart-embed--resilience iframe { height:930px; }
       .dual-placeholders { grid-template-columns:1fr; }
       .footer__inner { flex-direction:column; }
     }
@@ -211,7 +217,7 @@
           </div>
           <div class="chart-area dual-placeholders">
             <div class="chart-embed chart-embed--standard chart-embed--regional"><iframe src="graphs/pisa-regional-2025.html" title="Comparación regional PISA 2025"></iframe></div>
-            <div class="chart-placeholder"><span class="chart-label">Gráfico 3B</span><h3>Trayectorias seleccionadas</h3><p>Argentina frente a países de la región.</p></div>
+            <div class="chart-embed chart-embed--map"><iframe src="graphs/pisa-regional-mapa-2025.html" title="Mapa regional de los puntajes promedio PISA 2025"></iframe></div>
           </div>
         </div>
       </article>
@@ -241,7 +247,7 @@
             <div class="mini-stats"><span>Matemática · hombres +18</span><span>Lectura · mujeres +9</span></div>
           </div>
           <div class="chart-area">
-            <div class="chart-placeholder"><span class="chart-label">Gráfico 6 · Género</span><h3>Brechas que cambian según la materia</h3><p>Espacio preparado para la comparación interactiva por sexo.</p><span class="chart-badge">Matemática · Lectura · Ciencias</span></div>
+            <div class="chart-embed chart-embed--gender"><iframe src="graphs/pisa-sexo-2025.html" title="Puntajes PISA 2025 de varones y mujeres"></iframe></div>
           </div>
         </div>
       </article>
@@ -256,7 +262,7 @@
             <div class="mini-stats"><span>13,2% Matemática</span><span>14,6% Lectura</span><span>14,2% Ciencias</span></div>
           </div>
           <div class="chart-area">
-            <div class="chart-placeholder"><span class="chart-label">Gráfico 7 · Resiliencia</span><h3>Cuando el contexto no determina todo</h3><p>Espacio preparado para incorporar la próxima visualización.</p><span class="chart-badge">Próximamente</span></div>
+            <div class="chart-embed chart-embed--resilience"><iframe src="graphs/pisa-resilientes-2025.html" title="Porcentaje de estudiantes resilientes en PISA 2025"></iframe></div>
           </div>
         </div>
       </article>
