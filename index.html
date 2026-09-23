@@ -34,12 +34,21 @@
     .intro__wrap { width:min(100%, var(--max)); margin:auto; }
     .section-kicker { color:var(--blue); font-weight:800; font-size:.78rem; letter-spacing:.11em; text-transform:uppercase; }
     .intro h2 { margin-top:10px; max-width:760px; font-size:clamp(2rem, 4.2vw, 3.8rem); line-height:1.03; letter-spacing:-.05em; }
-    .explainer { min-height:min(680px, 100vh); margin-top:42px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); display:grid; grid-template-columns:repeat(3, 1fr); }
-    .explainer article { padding:42px clamp(24px, 3.6vw, 50px) 46px; border-right:1px solid var(--line); display:flex; flex-direction:column; }
+    .explainer { margin-top:42px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .explainer article { min-width:0; padding:36px clamp(18px, 2.1vw, 26px) 32px; border-right:1px solid var(--line); }
     .explainer article:last-child { border-right:0; }
-    .explainer__number { color:var(--sky); font-size:.78rem; font-weight:800; letter-spacing:.09em; }
-    .explainer h3 { margin:56px 0 18px; font-size:clamp(1.35rem, 2.15vw, 2rem); line-height:1.05; letter-spacing:-.035em; }
+    .explainer h3 { margin:0 0 18px; color:var(--navy); font-size:clamp(1.35rem, 2vw, 1.75rem); line-height:1.15; letter-spacing:-.035em; }
     .explainer p { color:#3f4f69; font-size:1rem; }
+    .explainer__deck { min-height:3em; line-height:1.5; }
+    .explainer__deck span { display:block; }
+    .explainer details { margin-top:26px; }
+    .explainer summary { width:fit-content; color:var(--blue); font-size:.85rem; font-weight:700; cursor:pointer; padding:4px 0; }
+    .explainer summary:hover { color:var(--navy); }
+    .explainer summary:focus-visible { outline:2px solid var(--blue); outline-offset:5px; }
+    .explainer__details { margin-top:16px; padding-top:16px; border-top:1px solid var(--line); }
+    .explainer__details p { color:#3f4f69; font-size:.93rem; line-height:1.55; }
+    .explainer__details p span { display:block; }
+    .explainer__details p + p { margin-top:12px; }
     .story { padding:0 24px; }
     .story__block { padding:clamp(72px, 10vw, 132px) 0; border-top:1px solid var(--line); scroll-margin-top:70px; }
     .story__grid { width:min(100%, var(--max)); margin:auto; display:grid; grid-template-columns:1fr; gap:clamp(34px, 5vw, 58px); align-items:start; }
@@ -118,15 +127,16 @@
     .footer h2 { font-size:1.55rem; letter-spacing:-.035em; }
     .footer p { max-width:520px; margin-top:10px; color:#bdcce4; }
     .footer small { max-width:400px; color:#9fb3d0; font-size:.76rem; }
+    @media (max-width:1000px) {
+      .explainer { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .explainer article:nth-child(2n) { border-right:0; }
+      .explainer article:nth-child(-n+2) { border-bottom:1px solid var(--line); }
+    }
     @media (max-width:800px) {
       .topbar__inner, .hero__content { width:min(calc(100% - 36px), var(--max)); }
       .brand { font-size:.65rem; }
       .bar-title { max-width:250px; }
       .intro, .story { padding-left:18px; padding-right:18px; }
-      .explainer { min-height:0; grid-template-columns:1fr; }
-      .explainer article { min-height:0; padding:34px 24px 38px; border-right:0; border-bottom:1px solid var(--line); }
-      .explainer article:last-child { border-bottom:0; }
-      .explainer h3 { margin-top:32px; }
       .story__grid { grid-template-columns:1fr; gap:30px; }
       .story__block--tint { margin-left:-18px; margin-right:-18px; padding-left:18px; padding-right:18px; }
       .chart-placeholder { min-height:300px; }
@@ -143,6 +153,11 @@
       .conclusion, .backmatter { padding-left:18px; padding-right:18px; }
       .credits__names, .source-list { grid-template-columns:repeat(2,minmax(0,1fr)); }
       .footer__inner { flex-direction:column; }
+    }
+    @media (max-width:560px) {
+      .explainer { grid-template-columns:1fr; }
+      .explainer article { padding:30px 22px; border-right:0; border-bottom:1px solid var(--line); }
+      .explainer article:last-child { border-bottom:0; }
     }
     @media (max-width:480px) {
       .topbar { height:58px; }
@@ -186,22 +201,56 @@
         <h2 id="pisa-heading">Una lectura de la educación argentina a partir de una misma regla de medición.</h2>
         <div class="explainer">
           <article>
-            <span class="explainer__number">01 · LA PRUEBA</span>
-            <h3>¿Qué son las pruebas PISA?</h3>
-            <p>PISA es una evaluación internacional coordinada por la OCDE cada tres años. Mide qué pueden hacer estudiantes de 15 años de más de 80 países, sin depender del año escolar que cursan.</p>
-            <p style="margin-top:18px">No evalúa si se cumplió un programa curricular: observa si los jóvenes pueden aplicar lo aprendido ante problemas de la vida cotidiana.</p>
+            <h3>Pruebas PISA</h3>
+            <p class="explainer__deck"><span>Evaluación global </span><span>a los 15 años.</span></p>
+            <details>
+              <summary aria-label="Más información sobre las Pruebas PISA">Más información</summary>
+              <div class="explainer__details">
+                <p><span>Evaluación internacional </span><span>coordinada por la OCDE.</span></p>
+                <p><span>Mide qué pueden hacer </span><span>estudiantes de 15 años.</span></p>
+                <p><span>Se realiza cada tres años </span><span>en más de 80 países.</span></p>
+                <p><span>No depende del año </span><span>escolar que cursan.</span></p>
+              </div>
+            </details>
           </article>
           <article>
-            <span class="explainer__number">02 · LA MEDICIÓN</span>
-            <h3>¿Qué miden, de qué manera y qué resultados se obtienen?</h3>
-            <p>PISA evalúa Matemática, Lectura y Ciencias mediante situaciones, textos, gráficos y problemas para resolver. Los resultados combinan puntajes promedio y seis niveles de desempeño.</p>
-            <p style="margin-top:18px">El Nivel 2 es el umbral mínimo de competencias: estar por debajo implica dificultades para resolver tareas básicas de comprensión, cálculo y razonamiento.</p>
+            <h3>Disciplinas</h3>
+            <p class="explainer__deck"><span>Matemática, Lectura </span><span>y Ciencias.</span></p>
+            <details>
+              <summary aria-label="Más información sobre las disciplinas">Más información</summary>
+              <div class="explainer__details">
+                <p><span>Evalúa Matemática, </span><span>Lectura y Ciencias.</span></p>
+                <p><span>Propone situaciones y </span><span>textos para interpretar.</span></p>
+                <p><span>Incluye gráficos y </span><span>problemas para resolver.</span></p>
+                <p><span>Combina puntajes promedio </span><span>y seis niveles de desempeño.</span></p>
+              </div>
+            </details>
           </article>
           <article>
-            <span class="explainer__number">03 · EL CONTEXTO</span>
-            <h3>¿Por qué son relevantes para analizar la educación en Argentina?</h3>
-            <p>PISA permite seguir la evolución de los aprendizajes y comparar a Argentina con otros países de la región bajo una misma medición.</p>
-            <p style="margin-top:18px">Además, sus cuestionarios de contexto muestran cómo el origen socioeconómico y el tipo de escuela se relacionan con los resultados, haciendo visibles las brechas educativas.</p>
+            <h3>Relevancia</h3>
+            <p class="explainer__deck"><span>Nivel 2: umbral </span><span>de competencias básicas.</span></p>
+            <details>
+              <summary aria-label="Más información sobre la relevancia del Nivel 2">Más información</summary>
+              <div class="explainer__details">
+                <p><span>El Nivel 2 marca el mínimo </span><span>de competencias básicas.</span></p>
+                <p><span>Estar por debajo implica </span><span>problemas de comprensión.</span></p>
+                <p><span>También dificultades </span><span>en tareas básicas de cálculo.</span></p>
+                <p><span>Y para resolver tareas </span><span>que exigen razonamiento.</span></p>
+              </div>
+            </details>
+          </article>
+          <article>
+            <h3>Impacto</h3>
+            <p class="explainer__deck"><span>Aprendizajes en el tiempo </span><span>y la región.</span></p>
+            <details>
+              <summary aria-label="Más información sobre el impacto de los datos">Más información</summary>
+              <div class="explainer__details">
+                <p><span>Permite seguir los cambios </span><span>en los aprendizajes.</span></p>
+                <p><span>Compara a Argentina </span><span>con países de la región.</span></p>
+                <p><span>Usa una misma medición </span><span>para comparar resultados.</span></p>
+                <p><span>Aporta datos comparables </span><span>para el debate educativo.</span></p>
+              </div>
+            </details>
           </article>
         </div>
       </div>
