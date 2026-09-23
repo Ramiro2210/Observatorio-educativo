@@ -41,9 +41,19 @@
     .explainer h3 { margin:56px 0 18px; font-size:clamp(1.35rem, 2.15vw, 2rem); line-height:1.05; letter-spacing:-.035em; }
     .explainer p { color:#3f4f69; font-size:1rem; }
     .story { padding:0 24px; }
-    .story__block { padding:clamp(72px, 10vw, 132px) 0; border-top:1px solid var(--line); }
+    .story__block { padding:clamp(72px, 10vw, 132px) 0; border-top:1px solid var(--line); scroll-margin-top:70px; }
     .story__grid { width:min(100%, var(--max)); margin:auto; display:grid; grid-template-columns:1fr; gap:clamp(34px, 5vw, 58px); align-items:start; }
     .story__meta { max-width:740px; }
+    .story__intro, .story__analysis { max-width:860px; }
+    .story__context { margin-top:24px; color:#30415e; font-size:1.08rem; line-height:1.58; }
+    .story__context p + p { margin-top:16px; }
+    .story__analysis { padding-top:26px; border-top:1px solid var(--line); }
+    .story__analysis p { color:#30415e; font-size:1.08rem; line-height:1.58; }
+    .story__analysis p + p { margin-top:16px; }
+    .story__analysis h3 { margin:30px 0 14px; color:var(--navy); font-size:clamp(1.3rem, 2.2vw, 1.72rem); line-height:1.18; letter-spacing:-.03em; text-wrap:balance; }
+    .story__analysis h3:first-child { margin-top:0; }
+    .story__context strong, .story__analysis strong { color:var(--navy); }
+    .story__analysis--bridge { margin:14px 0; }
     .story__index { display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; color:#fff; background:var(--navy); border-radius:50%; font-size:.78rem; font-weight:800; }
     .story h2 { margin-top:18px; font-size:clamp(2rem, 3.8vw, 3.25rem); line-height:1.02; letter-spacing:-.05em; }
     .story__meta p { margin-top:17px; color:var(--muted); font-size:1.03rem; }
@@ -55,15 +65,15 @@
     .score span { display:block; margin-top:6px; color:var(--muted); font-size:.75rem; font-weight:700; }
     .chart-area { min-width:0; width:100%; }
     .chart-embed { overflow:hidden; background:#fff; border:1px solid #dce7f6; border-radius:4px; }
-    .chart-embed iframe { display:block; width:100%; height:650px; border:0; background:#fff; }
-    .chart-embed--historical iframe { height:735px; }
-    .chart-embed--standard iframe { height:680px; }
-    .chart-embed--regional iframe { height:710px; }
-    .chart-embed--map iframe { height:735px; }
-    .chart-embed--escs iframe { height:680px; }
-    .chart-embed--management iframe { height:655px; }
-    .chart-embed--gender iframe { height:650px; }
-    .chart-embed--resilience iframe { height:640px; }
+    .chart-embed iframe { display:block; width:100%; height:760px; border:0; background:#fff; }
+    .chart-embed--historical iframe { height:760px; }
+    .chart-embed--standard iframe { height:720px; }
+    .chart-embed--regional iframe { height:760px; }
+    .chart-embed--map iframe { height:860px; }
+    .chart-embed--escs iframe { height:720px; }
+    .chart-embed--management iframe { height:720px; }
+    .chart-embed--gender iframe { height:720px; }
+    .chart-embed--resilience iframe { height:740px; }
     .chart-placeholder { position:relative; min-height:clamp(420px, 54vw, 620px); overflow:hidden; background:var(--mist); border:1px solid #dce7f6; border-radius:4px; display:flex; flex-direction:column; justify-content:flex-end; padding:28px; }
     .chart-placeholder::after { content:""; position:absolute; inset:0; opacity:.65; background-image:linear-gradient(#dce7f6 1px, transparent 1px), linear-gradient(90deg, #dce7f6 1px, transparent 1px); background-size:100% 25%, 25% 100%; pointer-events:none; }
     .chart-placeholder > * { position:relative; z-index:1; }
@@ -75,15 +85,39 @@
     .story__block--tint { margin:0 -24px; padding-left:24px; padding-right:24px; background:#f5f8fd; }
     .dual-placeholders { display:grid; grid-template-columns:1fr; gap:20px; }
     .dual-placeholders .chart-placeholder { min-height:clamp(360px, 45vw, 520px); padding:28px; }
-    .dual-placeholders h3 { font-size:1.55rem; }
-    .dual-placeholders p { font-size:.92rem; }
-    .mini-stats { margin-top:25px; display:flex; gap:14px; }
+    .dual-placeholders .chart-placeholder h3 { font-size:1.55rem; }
+    .dual-placeholders .chart-placeholder p { font-size:.92rem; }
+    .mini-stats { margin-top:25px; display:flex; flex-wrap:wrap; gap:14px; }
     .mini-stats span { padding:7px 10px; background:#e9f3fd; color:var(--navy); font-size:.8rem; font-weight:800; }
+    .conclusion { padding:clamp(72px, 10vw, 132px) 24px; border-top:1px solid var(--line); scroll-margin-top:70px; }
+    .closing__inner { width:min(100%, var(--max)); margin:auto; }
+    .conclusion h2 { max-width:860px; margin-top:18px; color:var(--navy); font-size:clamp(2rem, 3.8vw, 3.25rem); line-height:1.06; letter-spacing:-.05em; text-wrap:balance; }
+    .conclusion__text { max-width:860px; margin-top:32px; }
+    .conclusion__text p + p { margin-top:22px; }
+    .conclusion__takeaway { padding:22px 24px; border-left:3px solid var(--blue); background:var(--mist); }
+    .backmatter { padding:clamp(52px, 7vw, 88px) 24px; border-top:1px solid var(--line); background:#f5f8fd; }
+    .backmatter h2 { color:var(--navy); font-size:clamp(1.5rem, 2.8vw, 2.15rem); line-height:1.15; letter-spacing:-.035em; }
+    .credits, .sources { scroll-margin-top:94px; }
+    .credits__names { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px 28px; margin:26px 0 0; padding:0; list-style:none; color:#30415e; font-size:1.08rem; line-height:1.58; }
+    .sources { margin-top:54px; padding-top:46px; border-top:1px solid var(--line); }
+    .sources__intro { max-width:860px; margin-top:14px; color:var(--muted); font-size:1.03rem; line-height:1.58; }
+    .sources h3 { margin:30px 0 16px; color:var(--navy); font-size:1.15rem; line-height:1.3; }
+    .source-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:0; padding:0; list-style:none; }
+    .source-list li { min-width:0; }
+    .source-link { display:flex; flex-direction:column; gap:8px; height:100%; padding:20px; border:1px solid var(--line); border-radius:4px; background:#fff; text-decoration:none; transition:border-color .16s ease, background .16s ease; }
+    .source-link:hover { border-color:var(--blue); background:#f0f6fe; }
+    .source-link:focus-visible { outline:3px solid var(--blue); outline-offset:3px; }
+    .source-link__year { color:var(--navy); font-size:1.4rem; font-weight:800; line-height:1.1; }
+    .source-link__title { color:#30415e; font-size:.95rem; line-height:1.45; overflow-wrap:anywhere; }
+    .source-link__format { margin-top:auto; padding-top:6px; color:var(--blue); font-size:.74rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+    .sources__note { max-width:860px; margin-top:18px; color:var(--muted); font-size:.88rem; line-height:1.55; }
+    .source-list--resources { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .source-list--resources .source-link__title { color:var(--navy); font-weight:700; }
     .footer { padding:58px 24px; color:#eaf1fc; background:var(--navy); }
     .footer__inner { width:min(100%, var(--max)); margin:auto; display:flex; justify-content:space-between; gap:30px; }
     .footer h2 { font-size:1.55rem; letter-spacing:-.035em; }
     .footer p { max-width:520px; margin-top:10px; color:#bdcce4; }
-    .footer small { color:#9fb3d0; font-size:.76rem; }
+    .footer small { max-width:400px; color:#9fb3d0; font-size:.76rem; }
     @media (max-width:800px) {
       .topbar__inner, .hero__content { width:min(calc(100% - 36px), var(--max)); }
       .brand { font-size:.65rem; }
@@ -96,16 +130,18 @@
       .story__grid { grid-template-columns:1fr; gap:30px; }
       .story__block--tint { margin-left:-18px; margin-right:-18px; padding-left:18px; padding-right:18px; }
       .chart-placeholder { min-height:300px; }
-      .chart-embed iframe { height:760px; }
-      .chart-embed--historical iframe { height:830px; }
-      .chart-embed--standard iframe { height:750px; }
-      .chart-embed--regional iframe { height:720px; }
-      .chart-embed--map iframe { height:980px; }
-      .chart-embed--escs iframe { height:750px; }
-      .chart-embed--management iframe { height:730px; }
-      .chart-embed--gender iframe { height:720px; }
-      .chart-embed--resilience iframe { height:750px; }
+      .chart-embed iframe { height:1100px; }
+      .chart-embed--historical iframe { height:900px; }
+      .chart-embed--standard iframe { height:850px; }
+      .chart-embed--regional iframe { height:820px; }
+      .chart-embed--map iframe { height:1100px; }
+      .chart-embed--escs iframe { height:900px; }
+      .chart-embed--management iframe { height:850px; }
+      .chart-embed--gender iframe { height:850px; }
+      .chart-embed--resilience iframe { height:950px; }
       .dual-placeholders { grid-template-columns:1fr; }
+      .conclusion, .backmatter { padding-left:18px; padding-right:18px; }
+      .credits__names, .source-list { grid-template-columns:repeat(2,minmax(0,1fr)); }
       .footer__inner { flex-direction:column; }
     }
     @media (max-width:480px) {
@@ -117,6 +153,9 @@
       .score-row { gap:0; }
       .score strong { font-size:1.35rem; }
       .score span { font-size:.69rem; }
+      .conclusion__takeaway { padding:18px; }
+      .credits__names, .source-list { grid-template-columns:1fr; }
+      .credits__names { gap:12px; }
     }
     @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .hero__image, .hero__wash, .hero__lead { transition:none!important; } }
   </style>
@@ -171,14 +210,20 @@
     <section class="story" aria-label="Recorrido por los datos">
       <article class="story__block" id="presente">
         <div class="story__grid">
-          <div class="story__meta">
-            <p class="section-kicker">La foto del presente</p>
-            <h2>¿Qué saben hacer los estudiantes argentinos?</h2>
-            <p>La distribución por niveles evalúa el promedio en cada área. Además muestra qué proporción de estudiantes alcanza los diferentes niveles de desempeño.</p>
-            <div class="score-row" aria-label="Puntajes promedio 2025">
-              <div class="score"><strong>367</strong><span>Matemática</span></div>
-              <div class="score"><strong>389</strong><span>Lectura</span></div>
-              <div class="score"><strong>393</strong><span>Ciencias</span></div>
+          <div class="story__intro">
+            <div class="story__meta">
+              <p class="section-kicker">La foto del presente</p>
+              <h2>¿Qué saben hacer los estudiantes argentinos?</h2>
+              <p>La distribución por niveles complementa los puntajes promedio: muestra qué proporción de estudiantes alcanza los diferentes niveles de desempeño en cada área.</p>
+              <div class="score-row" aria-label="Puntajes promedio 2025">
+                <div class="score"><strong>367</strong><span>Matemática</span></div>
+                <div class="score"><strong>389</strong><span>Lectura</span></div>
+                <div class="score"><strong>393</strong><span>Ciencias</span></div>
+              </div>
+            </div>
+            <div class="story__context">
+              <p>Los promedios de <strong>367 puntos en Matemática, 389 en Lectura y 393 en Ciencias</strong> resumen el desempeño nacional, pero no cuentan toda la historia. La distribución permite mirar más allá de esa cifra y reconocer una dificultad que atraviesa las tres áreas: <strong>una gran proporción de estudiantes no alcanza el Nivel 2</strong>, referencia de PISA para las competencias básicas.</p>
+              <p>En Matemática, esa proporción llega al <strong>75,8%</strong>: aproximadamente tres de cada cuatro estudiantes. En Lectura es del <strong>59,6%</strong> y en Ciencias, del <strong>59,3%</strong>. La dificultad, por lo tanto, no se concentra en una sola materia ni en un grupo pequeño de jóvenes.</p>
             </div>
           </div>
           <div class="chart-area">
@@ -186,87 +231,202 @@
               <iframe src="graphs/pisa-niveles-2025.html" title="PISA 2025 Argentina — Niveles de desempeño"></iframe>
             </div>
           </div>
+          <div class="story__analysis">
+            <p>En el otro extremo, <strong>son muy pocos los estudiantes que llegan a los niveles más altos de desempeño</strong>: el grupo de Nivel 5 o superior no alcanza el 1% en ninguna de las tres áreas. La distribución muestra así un doble desafío: ampliar el acceso a las competencias básicas y generar oportunidades para desarrollar aprendizajes más avanzados.</p>
+            <h3>¿Por qué importa el Nivel 2?</h3>
+            <p>PISA utiliza este nivel como una referencia para identificar competencias básicas. Estar por debajo no significa simplemente “tener una nota baja”: indica dificultades para resolver determinadas tareas y aplicar conocimientos en situaciones concretas. La lectura de un texto, la interpretación de información o la resolución de un problema cotidiano ponen en juego esas herramientas.</p>
+            <p>Los niveles describen desempeños en una evaluación, <strong>no capacidades fijas ni destinos individuales</strong>. Su utilidad es señalar dónde se necesitan más oportunidades de aprendizaje y acompañamiento.</p>
+          </div>
         </div>
       </article>
 
       <article class="story__block story__block--tint" id="historico">
         <div class="story__grid">
-          <div class="story__meta">
-            <p class="section-kicker">19 años de PISA</p>
-            <h2>Del estancamiento al retroceso</h2>
-            <p>El desempeño a lo largo de los años ha mostrado signos de estancamiento y empeoramiento en Matemática, Lectura y Ciencias desde 2006 hasta 2025.</p>
+          <div class="story__intro">
+            <div class="story__meta">
+              <p class="section-kicker">19 años de PISA</p>
+              <h2>Del estancamiento al retroceso</h2>
+              <p>Entre 2006 y 2025, la serie combina períodos de estabilidad, recuperaciones y retrocesos. La última edición muestra una caída simultánea en Matemática, Lectura y Ciencias.</p>
+            </div>
+            <div class="story__context"><p><strong>Argentina cerró PISA 2025 con una caída en las tres áreas evaluadas.</strong> Matemática bajó a <strong>367 puntos</strong>, Lectura a <strong>389</strong> y Ciencias a <strong>393</strong>. Frente a 2022, los resultados retrocedieron <strong>11, 12 y 13 puntos</strong>, respectivamente.</p><p>El dato más fuerte aparece en <strong>Matemática</strong>, que registró el puntaje más bajo de toda la serie disponible. Lectura y Ciencias también interrumpieron la relativa estabilidad que habían mostrado en las últimas ediciones.</p></div>
           </div>
           <div class="chart-area">
             <div class="chart-embed chart-embed--historical">
               <iframe src="graphs/pisa-argentina-historico-2025.html" title="Evolución histórica de los puntajes PISA en Argentina"></iframe>
             </div>
-            <aside class="story__note"><strong>Nota sobre 2015.</strong> La edición 2015 no integra la trayectoria porque la OCDE indicó que los resultados de Argentina no eran comparables con los de otras ediciones debido a un marco muestral incompleto.</aside>
+            <aside class="story__note"><strong>Nota sobre 2015.</strong> La edición 2015 no integra la trayectoria porque la OCDE indicó que los resultados nacionales de Argentina no eran comparables con los de otras ediciones debido a un marco muestral incompleto. La discontinuidad es metodológica: no se reemplaza ese registro con datos de CABA. <a href="https://www.oecd.org/content/dam/oecd/en/about/programmes/edu/pisa/publications/national-reports/pisa-2018/featured-country-specific-overviews/PISA2018_CN_ARG.pdf" target="_blank" rel="noopener noreferrer">Ver la aclaración de la OCDE.</a></aside>
+          </div>
+          <div class="story__analysis">
+            <h3>Una lectura del recorrido</h3>
+            <p>Los resultados no dibujan una caída continua ni idéntica en todas las materias. Frente a 2006, Matemática termina <strong>14 puntos por debajo</strong> y Ciencias, <strong>4 puntos por debajo</strong>; Lectura conserva una diferencia de <strong>15 puntos a favor</strong>, aunque retrocede respecto de 2022. El punto de comparación importa para entender la trayectoria.</p>
+            <p>El deterioro de Matemática y la caída conjunta de la última edición plantean un desafío persistente. Las recuperaciones parciales de Lectura y Ciencias no evitaron el retroceso reciente. La serie permite describir estos cambios, pero <strong>no alcanza por sí sola para atribuirlos a una reforma curricular, una gestión de gobierno o una política específica</strong>.</p>
           </div>
         </div>
       </article>
 
       <article class="story__block" id="regional">
         <div class="story__grid">
-          <div class="story__meta">
-            <p class="section-kicker">Regional</p>
-            <h2>El estado actual de la región</h2>
-            <p>La comparación entre Argentina y los países vecinos de la región permite comparar tendencias en las trayectorias educativas.</p>
+          <div class="story__intro">
+            <div class="story__meta">
+              <p class="section-kicker">Regional</p>
+              <h2>El estado actual de la región</h2>
+              <p>La comparación con los países de la región permite ubicar el desempeño argentino y reconocer diferencias entre áreas de aprendizaje.</p>
+            </div>
+            <div class="story__context">
+              <p>Los desafíos de aprendizaje no son exclusivos de Argentina, pero los resultados tampoco son iguales en toda la región. <strong>Chile y Uruguay superan los puntajes argentinos en las tres áreas</strong>. En el conjunto de ocho países mostrado, Argentina registra el promedio más bajo en Lectura y Ciencias; en Matemática, supera a Brasil y Perú.</p>
+              <p>La distancia con los mejores resultados de este grupo es de <strong>38 puntos en Matemática</strong>, respecto de Uruguay; <strong>47 en Lectura</strong>, respecto de Chile; y <strong>52 en Ciencias</strong>, respecto de Uruguay. Mirar cada materia evita reducir esta comparación a una única posición en un ranking.</p>
+            </div>
           </div>
           <div class="chart-area dual-placeholders">
             <div class="chart-embed chart-embed--standard chart-embed--regional"><iframe src="graphs/pisa-regional-2025.html" title="Comparación regional PISA 2025"></iframe></div>
             <div class="chart-embed chart-embed--map"><iframe src="graphs/pisa-regional-mapa-2025.html" title="Mapa regional de los puntajes promedio PISA 2025"></iframe></div>
+          </div>
+          <div class="story__analysis">
+            <h3>Una foto regional, no una explicación de sus causas</h3>
+            <p>El ranking facilita comparar valores y el mapa permite ubicarlos en el territorio. Son dos lecturas complementarias del mismo conjunto de datos: la superficie de un país no representa su desempeño ni la cantidad de estudiantes evaluados.</p>
+            <p><strong>Estos gráficos corresponden a una sola edición</strong>. Muestran diferencias actuales, pero no permiten afirmar que las brechas se hayan ensanchado ni que Argentina haya perdido posiciones a lo largo del tiempo. Para estudiar esa evolución y el papel de las políticas educativas hacen falta series comparables de cada país y más información sobre sus contextos.</p>
           </div>
         </div>
       </article>
 
       <article class="story__block story__block--tint" id="desigualdad">
         <div class="story__grid">
-          <div class="story__meta">
-            <p class="section-kicker">La desigualdad</p>
-            <h2>Las desigualdades socioeconómicas y culturales se reflejan en los resultados</h2>
-            <p>Los datos permiten poner en relación el nivel socioeconómico y cultural de los estudiantes con los resultados de aprendizaje y el tipo de gestión escolar.</p>
+          <div class="story__intro">
+            <div class="story__meta">
+              <p class="section-kicker">La desigualdad</p>
+              <h2>Las desigualdades socioeconómicas y culturales se reflejan en los resultados</h2>
+              <p>Los datos permiten poner en relación el nivel socioeconómico y cultural de los estudiantes con los resultados de aprendizaje y el tipo de gestión escolar.</p>
+            </div>
+            <div class="story__context">
+              <p>El promedio nacional reúne realidades muy diferentes. Al ordenar a los estudiantes según el índice de estatus económico, social y cultural (ESCS), aparece un patrón compartido: <strong>los puntajes promedio aumentan a medida que mejora la posición socioeconómica</strong>. El origen se asocia con los resultados, aunque no determina el recorrido de cada estudiante.</p>
+              <p>Los cuartiles dividen a la población analizada en cuatro grupos: Q1 reúne al 25% con menor índice ESCS y Q4 al 25% con mayor índice. Entre ambos extremos, la diferencia es de <strong>79 puntos en Matemática, 76 en Lectura y 82 en Ciencias</strong>. Q2 y Q3 muestran los escalones intermedios de esa desigualdad.</p>
+            </div>
           </div>
           <div class="chart-area dual-placeholders">
             <div class="chart-embed chart-embed--standard chart-embed--escs"><iframe src="graphs/pisa-escs-2025.html" title="Resultados PISA según cuartiles socioeconómicos"></iframe></div>
+            <div class="story__analysis story__analysis--bridge">
+              <h3>Otra mirada: el tipo de gestión escolar</h3>
+              <p>La comparación entre escuelas estatales y privadas muestra otra brecha: los promedios de la gestión privada son <strong>57 puntos mayores en Matemática, 60 en Lectura y 61 en Ciencias</strong>. La diferencia aparece en las tres áreas, pero no debe interpretarse de manera aislada de las condiciones sociales de quienes asisten a cada tipo de escuela.</p>
+            </div>
             <div class="chart-embed chart-embed--standard chart-embed--management"><iframe src="graphs/pisa-gestion-2025.html" title="Resultados PISA según tipo de gestión escolar"></iframe></div>
+          </div>
+          <div class="story__analysis">
+            <h3>Desigualdad de resultados, no destinos inevitables</h3>
+            <p>Estos dos gráficos muestran asociaciones, no una explicación causal completa. <strong>La brecha entre gestiones no mide por sí sola el efecto del tipo de escuela</strong>: son promedios que no están ajustados por el origen socioeconómico de los estudiantes ni por otras características de los establecimientos.</p>
+            <p>Leer ambas comparaciones en conjunto permite formular una pregunta central para la educación: ¿qué apoyos necesitan las escuelas y los estudiantes para que las diferencias de origen no se traduzcan en oportunidades de aprendizaje tan desiguales?</p>
           </div>
         </div>
       </article>
 
       <article class="story__block" id="genero">
         <div class="story__grid">
-          <div class="story__meta">
-            <p class="section-kicker">Brecha por género</p>
-            <h2>Los resultados muestran diferentes tendencias de acuerdo al género</h2>
-            <p>La diferencia entre los puntajes de varones y mujeres cambia según el área de conocimiento.</p>
-            <div class="mini-stats"><span>Matemática · hombres +18</span><span>Lectura · mujeres +9</span></div>
+          <div class="story__intro">
+            <div class="story__meta">
+              <p class="section-kicker">Brecha por género</p>
+              <h2>Los resultados muestran diferentes tendencias de acuerdo al género</h2>
+              <p>La diferencia entre los puntajes de varones y mujeres cambia según el área de conocimiento.</p>
+              <div class="mini-stats"><span>Matemática · varones +18</span><span>Lectura · mujeres +9</span></div>
+            </div>
+            <div class="story__context">
+              <p>Cuando los resultados se desagregan entre varones y mujeres, <strong>la brecha cambia de dirección según la materia</strong>. En Matemática, los varones obtienen 376 puntos frente a 358 de las mujeres: una diferencia de 18 puntos. En Lectura, las mujeres alcanzan 394 frente a 385 de los varones, una ventaja de 9 puntos.</p>
+              <p>Ciencias completa la comparación con 397 puntos para los varones y 390 para las mujeres: una diferencia de <strong>7 puntos</strong>. No hay, por lo tanto, un grupo con mayor promedio en todas las áreas evaluadas.</p>
+            </div>
           </div>
           <div class="chart-area">
             <div class="chart-embed chart-embed--gender"><iframe src="graphs/pisa-sexo-2025.html" title="Puntajes PISA 2025 de varones y mujeres"></iframe></div>
+          </div>
+          <div class="story__analysis">
+            <h3>Promedios de grupos, no capacidades individuales</h3>
+            <p>Estas diferencias no describen a cada estudiante ni prueban capacidades innatas. Son una invitación a estudiar las oportunidades de aprendizaje, las expectativas y las experiencias escolares en cada área, <strong>sin convertir las brechas en estereotipos</strong>.</p>
+            <p>El gráfico no identifica las causas de esas diferencias ni permite anticipar las elecciones universitarias o laborales de los jóvenes. Para comprender su persistencia y sus posibles efectos hacen falta datos de otras ediciones y estudios que sigan las trayectorias educativas.</p>
           </div>
         </div>
       </article>
 
       <article class="story__block story__block--tint" id="resiliencia">
         <div class="story__grid">
-          <div class="story__meta">
-            <p class="section-kicker">Excepciones</p>
-            <h2>Los estudiantes que logran romper la tendencia</h2>
-            <p>Este bloque reunirá los indicadores de resiliencia: estudiantes que, pese a un contexto desfavorable, alcanzan desempeños altos.</p>
-            <div class="mini-stats"><span>13,2% Matemática</span><span>14,6% Lectura</span><span>14,2% Ciencias</span></div>
+          <div class="story__intro">
+            <div class="story__meta">
+              <p class="section-kicker">Excepciones</p>
+              <h2>Los estudiantes que logran romper la tendencia</h2>
+              <p>La resiliencia académica pone el foco en estudiantes que alcanzan desempeños altos pese a un contexto socioeconómico desfavorable.</p>
+              <div class="mini-stats"><span>13,2% Matemática</span><span>14,6% Lectura</span><span>14,2% Ciencias</span></div>
+            </div>
+            <div class="story__context">
+              <p>Las desigualdades no agotan la historia. El indicador de estudiantes resilientes permite reconocer trayectorias que se apartan de la asociación entre desventaja social y menor rendimiento. Los valores reportados son <strong>13,2% en Matemática, 14,6% en Lectura y 14,2% en Ciencias</strong>: en ninguna de las tres áreas llegan al 20%.</p>
+              <p>Lectura presenta el valor más alto, con una diferencia de <strong>1,4 puntos porcentuales</strong> respecto de Matemática. Estos porcentajes no se suman: corresponden a indicadores por área y no permiten saber cuántos estudiantes reúnen la condición en las tres materias a la vez.</p>
+            </div>
           </div>
           <div class="chart-area">
             <div class="chart-embed chart-embed--resilience"><iframe src="graphs/pisa-resilientes-2025.html" title="Porcentaje de estudiantes resilientes en PISA 2025"></iframe></div>
           </div>
+          <div class="story__analysis">
+            <h3>De la excepción a más oportunidades</h3>
+            <p>Estas trayectorias recuerdan que <strong>el contexto de origen no fija un destino educativo inevitable</strong>. Sin embargo, el indicador no permite atribuir los resultados al esfuerzo individual, a una práctica pedagógica o a un apoyo particular: esas explicaciones requieren una investigación adicional.</p>
+            <p>La pregunta que deja abierto este recorrido es cómo ampliar las condiciones para aprender. Identificar los apoyos escolares, familiares e institucionales que acompañan estas experiencias puede orientar nuevas investigaciones y acciones, sin trasladar a los estudiantes la responsabilidad de superar por sí solos las desigualdades.</p>
+          </div>
         </div>
       </article>
     </section>
+
+    <section class="conclusion" id="conclusion" aria-labelledby="conclusion-title">
+      <div class="closing__inner">
+        <p class="section-kicker">Conclusión</p>
+        <h2 id="conclusion-title">Un presente difícil, no un destino irreversible</h2>
+        <div class="story__context conclusion__text">
+          <p>Los datos analizados muestran que <strong>la educación argentina atraviesa una situación crítica</strong> que no puede explicarse a partir de un único indicador. Los bajos puntajes en matemática, lectura y ciencias, el elevado porcentaje de estudiantes que no alcanza el nivel mínimo de competencias y el retroceso registrado en la última evaluación, conforman un escenario preocupante. La comparación regional refuerza este diagnóstico y ubica a la Argentina entre los países con <strong>menor desempeño</strong>.</p>
+          <p>Los resultados también muestran que <strong>el problema no afecta a todos los estudiantes de la misma manera</strong>. El nivel socioeconómico y cultural, el tipo de gestión escolar y el género se asocian con diferencias significativas en los aprendizajes. En particular, la distancia entre quienes cuentan con mayores recursos y quienes crecen en contextos desfavorables evidencia que <strong>la desigualdad social también se traduce en desigualdad educativa</strong>. Las pruebas PISA no explican por sí solas las causas de estas brechas ni reflejan todas las dimensiones del sistema, pero <strong>ofrecen una base concreta</strong> para identificarlas y orientar la discusión pública.</p>
+          <p>En este escenario, <strong>los estudiantes resilientes representan una señal tan valiosa como desafiante</strong>. Sus resultados demuestran que <strong>las condiciones de origen influyen, pero no determinan</strong> las trayectorias escolares. Aunque todavía constituyen una minoría, estos casos permiten advertir que <strong>es posible alcanzar desempeños altos</strong> incluso en contextos adversos.</p>
+          <p class="conclusion__takeaway">Nuestra conclusión es que <strong>el desafío consiste en comprender qué condiciones favorecen esos recorridos y conseguir que dejen de ser excepcionales</strong>.</p>
+          <p>Este análisis permite <strong>dimensionar la situación actual</strong> y plantea la necesidad de sostener políticas educativas capaces de reducir las desigualdades y mejorar los aprendizajes. Los resultados describen un presente difícil, pero <strong>no un destino irreversible</strong>. Reconocer la magnitud del problema es un primer paso: convertir ese diagnóstico en decisiones sostenidas puede abrir el camino hacia <strong>una educación más equitativa y capaz de ofrecer mejores oportunidades y resultados</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="backmatter">
+      <div class="closing__inner">
+        <section class="credits" id="equipo" aria-labelledby="credits-title">
+          <h2 id="credits-title">Quiénes realizaron este trabajo</h2>
+          <ul class="credits__names" role="list">
+            <li>Ramiro Florio</li>
+            <li>Agustín Contreras Archenti</li>
+            <li>Macarena Laviero</li>
+            <li>Sofia Hou</li>
+            <li>Stefania Fossa Olandini</li>
+            <li>Tomás Cúspide</li>
+          </ul>
+        </section>
+
+        <section class="sources" id="fuentes" aria-labelledby="sources-title">
+          <h2 id="sources-title">Fuentes y documentación</h2>
+          <p class="sources__intro">Publicaciones de la OCDE y recursos oficiales de consulta. Los enlaces se abren en una pestaña nueva.</p>
+          <h3>Publicaciones por edición</h3>
+          <ul class="source-list" role="list">
+            <li><a class="source-link" href="https://www.oecd.org/content/dam/oecd/es/publications/reports/2004/12/learning-for-tomorrow-s-world_g1gh487c/9788429405804-es.pdf" target="_blank" rel="noopener noreferrer"><span class="source-link__year">2003</span><span class="source-link__title">Informe PISA 2003</span><span class="source-link__format">OCDE · PDF</span></a></li>
+            <li><a class="source-link" href="https://www.oecd.org/content/dam/oecd/es/publications/reports/2007/12/pisa-2006_g1gh9b87/9789264066205-es.pdf" target="_blank" rel="noopener noreferrer"><span class="source-link__year">2006</span><span class="source-link__title">Informe PISA 2006</span><span class="source-link__format">OCDE · PDF</span></a></li>
+            <li><a class="source-link" href="https://www.oecd.org/content/dam/oecd/es/publications/reports/2010/12/pisa-2009-results-learning-to-learn_g1g1184e/9789264177529-es.pdf" target="_blank" rel="noopener noreferrer"><span class="source-link__year">2009</span><span class="source-link__title">Informe PISA 2009: Aprendiendo a aprender</span><span class="source-link__format">OCDE · PDF</span></a></li>
+            <li><a class="source-link" href="https://www.oecd.org/content/dam/oecd/en/publications/reports/2014/02/pisa-2012-results-what-students-know-and-can-do-volume-i-revised-edition-february-2014_g1g3e8ef/9789264208780-en.pdf" target="_blank" rel="noopener noreferrer"><span class="source-link__year">2012</span><span class="source-link__title">Resultados PISA 2012 · Volumen I, edición revisada</span><span class="source-link__format">OCDE · PDF</span></a></li>
+            <li><a class="source-link" href="https://www.oecd.org/content/dam/oecd/es/publications/reports/2016/12/pisa-2015-results-in-focus_11cf5e98/6c052c82-es.pdf" target="_blank" rel="noopener noreferrer"><span class="source-link__year">2015</span><span class="source-link__title">PISA 2015: Resultados clave</span><span class="source-link__format">OCDE · PDF</span></a></li>
+            <li><a class="source-link" href="https://www.oecd.org/content/dam/oecd/en/publications/reports/2019/12/pisa-2018-results-volume-i_947e3529/5f07c754-en.pdf" target="_blank" rel="noopener noreferrer"><span class="source-link__year">2018</span><span class="source-link__title">Resultados PISA 2018 · Volumen I</span><span class="source-link__format">OCDE · PDF</span></a></li>
+            <li><a class="source-link" href="https://www.oecd.org/content/dam/oecd/en/publications/reports/2023/12/pisa-2022-results-volume-i_76772a36/53f23881-en.pdf" target="_blank" rel="noopener noreferrer"><span class="source-link__year">2022</span><span class="source-link__title">Resultados PISA 2022 · Volumen I</span><span class="source-link__format">OCDE · PDF</span></a></li>
+            <li><a class="source-link" href="https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/09/pisa-2025-results-volume-i_5265bfb1/73451bc5-en.pdf" target="_blank" rel="noopener noreferrer"><span class="source-link__year">2025</span><span class="source-link__title">Resultados PISA 2025 · Volumen I</span><span class="source-link__format">OCDE · PDF</span></a></li>
+          </ul>
+          <h3>Argentina y resultados de PISA 2025</h3>
+          <ul class="source-list source-list--resources" role="list">
+            <li><a class="source-link" href="https://www.oecd.org/en/publications/pisa-2025-results-volume-i-country-notes_2d4ff9ea-en/argentina_e2019444-en.html?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer"><span class="source-link__title">Informe oficial PISA 2025 — Argentina (OCDE)</span><span class="source-link__format">Informe por país</span></a></li>
+            <li><a class="source-link" href="https://gpseducation.oecd.org/CountryProfile?primaryCountry=ARG&amp;topic=PI&amp;treshold=5&amp;utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer"><span class="source-link__title">Datos oficiales de Argentina — Education GPS OCDE</span><span class="source-link__format">Perfil de país · Datos</span></a></li>
+            <li><a class="source-link" href="https://www.argentina.gob.ar/noticias/evaluaciones-pisa-2025-los-resultados-reflejan-los-aprendizajes-acumulados-tras-12-anos-de?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer"><span class="source-link__title">Comunicado oficial de la Secretaría de Educación argentina</span><span class="source-link__format">Argentina.gob.ar</span></a></li>
+            <li><a class="source-link" href="https://www.oecd.org/en/publications/pisa-2025-results-volume-i_73451bc5-en.html?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer"><span class="source-link__title">Informe mundial PISA 2025 de la OCDE</span><span class="source-link__format">Publicación internacional</span></a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
   </main>
 
   <footer class="footer">
     <div class="footer__inner">
       <div><h2>Educación argentina, en datos.</h2><p>Un recorrido visual para leer aprendizajes, brechas y trayectorias sin perder de vista el contexto.</p></div>
-      <small>Fuentes generales: OCDE · PISA. Las fuentes específicas se indicarán en cada gráfico.</small>
+      <small>Fuentes generales: OCDE · PISA. Las fuentes específicas se indican en cada gráfico. Las diferencias citadas se calculan a partir de los valores mostrados; no constituyen pruebas de significación estadística.</small>
     </div>
   </footer>
 
@@ -287,6 +447,42 @@
       updateHero();
       window.addEventListener('scroll', updateHero, { passive:true });
     })();
+
+    // Los gráficos del paquete comparten origen con la web al publicarse.
+    // Medir su contenido permite crecer y reducirse sin scroll interno.
+    document.querySelectorAll('.chart-embed iframe').forEach(frame => {
+      let observer;
+      let pending;
+      const connect = () => {
+        if (observer) observer.disconnect();
+        if (pending) cancelAnimationFrame(pending);
+        try {
+          const doc = frame.contentDocument;
+          const content = doc && doc.querySelector('main');
+          if (!content) return;
+          doc.documentElement.style.overflowY = 'hidden';
+          const fit = () => {
+            cancelAnimationFrame(pending);
+            pending = requestAnimationFrame(() => {
+              const style = frame.contentWindow.getComputedStyle(doc.body);
+              const bottom = content.getBoundingClientRect().bottom + frame.contentWindow.scrollY;
+              const height = Math.ceil(bottom + (parseFloat(style.paddingBottom) || 0) + 8);
+              if (height > 0 && Math.abs(frame.clientHeight - height) > 1) {
+                frame.style.height = height + 'px';
+              }
+            });
+          };
+          observer = new ResizeObserver(fit);
+          observer.observe(content);
+          doc.fonts.ready.then(fit);
+          fit();
+        } catch {
+          // Mantener las alturas de respaldo cuando el navegador aísla archivos locales.
+        }
+      };
+      frame.addEventListener('load', connect);
+      connect();
+    });
   </script>
 </body>
 </html>
